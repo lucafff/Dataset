@@ -18,10 +18,10 @@ git clone https://github.com/lucafff/English-Italian-translator-using-transforme
 #### 3 Install requirements 
 ```
 cd English-Italian-translator-using-transformer
-pip3 install -r requirements.txt
+pip install -r requirements.txt
 ```
 
 #### 4 Run the project
 ```
-python3 Eng-Ita-Transl.py
+python Eng-Ita-Transl.py
 ```
