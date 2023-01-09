@@ -12,7 +12,7 @@ cd Eng-Ita-Translator
 
 #### 2 Clone the project's repo 
 ```
-https://github.com/lucafff/English-Italian-translator-using-transformer.git
+git clone https://github.com/lucafff/English-Italian-translator-using-transformer.git
 ```
 
 #### 3 Install requirements 
