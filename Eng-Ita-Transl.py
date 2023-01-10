@@ -32,9 +32,12 @@ def convert(list):
 data = convert(raw_data)
 
 #Visualizzazione di tre traduzione casuali
-print("Visualizzazione di tre traduzione casuali dal dataset")
+print("\n")
+print("Visualizzazione di tre traduzione casuali dal dataset\n")
 for i in range(3):
     print(random.choice(data))
+    print("\n")
+
 
 random.shuffle(raw_data)
 totalDataLen = len(raw_data)
@@ -52,6 +55,7 @@ strip_chars = strip_chars.replace("[", "")
 strip_chars = strip_chars.replace("]", "")
 
 f"[{re.escape(strip_chars)}]"
+
 
 #Tokenizzazione delle parole del dataset
 def custom_standardization(input_string):
@@ -74,7 +78,7 @@ target_vectorization = layers.TextVectorization(
     standardize=custom_standardization
 )
 
-#divisioone in tuple delle due traduzioni
+#divisione in tuple delle due traduzioni
 train_english_texts = [pair[0] for pair in train_pairs]
 train_italian_texts = [pair[1] for pair in train_pairs]
 source_vectorization.adapt(train_english_texts)
@@ -103,7 +107,9 @@ def make_dataset(pairs):
 train_ds = make_dataset(train_pairs)
 val_ds = make_dataset(val_pairs)
 
+print("\n")
 print("Esempio di Tokenizzazione di alcune frasi")
+print("\n")
 print(list(train_ds.as_numpy_iterator())[50])
 
 #Creazione Encoder del Transformer
@@ -251,6 +257,9 @@ decoder_outputs = layers.Dense(vocab_size, activation="softmax")(x)
 transformer = keras.Model([encoder_inputs, decoder_inputs], decoder_outputs)
 
 #stampa dei parametri
+print("\n")
+print("Struttura del modello creato")
+print("\n")
 transformer.summary()
 
 #definizione delle epoche ed effettiva fit del tranformer
@@ -286,6 +295,9 @@ plt.legend()
 plt.show()
 
 #Stampa di 5 traduzione eseguite dal modello
+print("\n")
+print("Stampa di 5 traduzioni eseguite dal modello")
+print("\n")
 ita_vocab = target_vectorization.get_vocabulary()
 ita_index_lookup = dict(zip(range(len(ita_vocab)), ita_vocab))
 max_decoded_sentence_length = 20
