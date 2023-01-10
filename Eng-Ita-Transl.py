@@ -9,8 +9,7 @@ import matplotlib.pyplot as plt
 from tensorflow.keras import layers
 from tensorflow import keras
 
-file = open("English-Italian-translator-using-transformer/ita.txt", 'r', encoding = "utf8")
-#file = open("ita.txt", 'r', encoding = "utf8")
+file = open("ita.txt", 'r', encoding = "utf8")
 raw_data = []
 
 for line in file:
