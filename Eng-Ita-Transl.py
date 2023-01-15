@@ -246,34 +246,78 @@ class PositionalEmbedding(layers.Layer):
         return config
 
         #Parametri del tranformer
-embed_dim = 256
-dense_dim = 2048
-num_heads = 8
 
-encoder_inputs = keras.Input(shape=(None,), dtype="int64", name="english")
-x = PositionalEmbedding(sequence_length, vocab_size, embed_dim)(encoder_inputs)
-encoder_outputs = TransformerEncoder(embed_dim, dense_dim, num_heads)(x)
+choice = input("\nIf you want to custom your parameters press 1, if you want to use the suggested ones press 2\n")
+if choice == '2':
+    embed_dim = 256
+    dense_dim = 2048
+    num_heads = 8
 
-decoder_inputs = keras.Input(shape=(None,), dtype="int64", name="italian")
-x = PositionalEmbedding(sequence_length, vocab_size, embed_dim)(decoder_inputs)
-x = TransformerDecoder(embed_dim, dense_dim, num_heads)(x, encoder_outputs)
-x = layers.Dropout(0.5)(x)
-decoder_outputs = layers.Dense(vocab_size, activation="softmax")(x)
-transformer = keras.Model([encoder_inputs, decoder_inputs], decoder_outputs)
+    encoder_inputs = keras.Input(shape=(None,), dtype="int64", name="english")
+    x = PositionalEmbedding(sequence_length, vocab_size, embed_dim)(encoder_inputs)
+    encoder_outputs = TransformerEncoder(embed_dim, dense_dim, num_heads)(x)
 
-#stampa dei parametri
-print("\n")
-print("Structure of the model")
-print("\n")
-transformer.summary()
+    decoder_inputs = keras.Input(shape=(None,), dtype="int64", name="italian")
+    x = PositionalEmbedding(sequence_length, vocab_size, embed_dim)(decoder_inputs)
+    x = TransformerDecoder(embed_dim, dense_dim, num_heads)(x, encoder_outputs)
+    x = layers.Dropout(0.5)(x)
+    decoder_outputs = layers.Dense(vocab_size, activation="softmax")(x)
+    transformer = keras.Model([encoder_inputs, decoder_inputs], decoder_outputs)
 
-#definizione delle epoche ed effettiva fit del tranformer
-opt = keras.optimizers.Adam(learning_rate=0.001)
-transformer.compile(
-    optimizer=opt,
-    loss="sparse_categorical_crossentropy",
-    metrics=["accuracy"])
-history = transformer.fit(train_ds, epochs=30, validation_data=val_ds)
+    #stampa dei parametri
+    print("\n")
+    print("Structure of the model")
+    print("\n")
+    transformer.summary()
+
+    #definizione delle epoche ed effettiva fit del tranformer
+    opt = keras.optimizers.Adam(learning_rate=0.001)
+    transformer.compile(
+        optimizer=opt,
+        loss="sparse_categorical_crossentropy",
+        metrics=["accuracy"])
+    history = transformer.fit(train_ds, epochs=20, validation_data=val_ds)
+
+else:
+    
+    embed_dim = 256
+    dense_dim = 2048
+    num_heads = 8
+
+    encoder_inputs = keras.Input(shape=(None,), dtype="int64", name="english")
+    x = PositionalEmbedding(sequence_length, vocab_size, embed_dim)(encoder_inputs)
+    encoder_outputs = TransformerEncoder(embed_dim, dense_dim, num_heads)(x)
+
+    decoder_inputs = keras.Input(shape=(None,), dtype="int64", name="italian")
+    x = PositionalEmbedding(sequence_length, vocab_size, embed_dim)(decoder_inputs)
+    x = TransformerDecoder(embed_dim, dense_dim, num_heads)(x, encoder_outputs)
+    
+    choice2 = "2.0"
+    while float(choice2) < 0.09 or float(choice2) > 1.1:
+        choice2 = input("\nscegli dropout fra 0.1 e 1\n")
+    x = layers.Dropout(float(choice2)(x)
+    decoder_outputs = layers.Dense(vocab_size, activation="softmax")(x)
+    transformer = keras.Model([encoder_inputs, decoder_inputs], decoder_outputs)
+
+    #stampa dei parametri
+    print("\n")
+    print("Structure of the model")
+    print("\n")
+    transformer.summary()
+
+    #definizione delle epoche ed effettiva fit del tranformer
+    choice = input("\nIf you want to use Adam press 1, if you want to use RMSprop press 2
+    if choice == '2':
+        opt = keras.optimizers.RMSprop(learning_rate=0.001)
+    else:
+        opt = keras.optimizers.Adam(learning_rate=0.001)
+                   
+    choice = input("\nDecide the number of epoches you want to do\n")
+    transformer.compile(
+        optimizer=opt,
+        loss="sparse_categorical_crossentropy",
+        metrics=["accuracy"])
+    history = transformer.fit(train_ds, epochs=int(choice), validation_data=val_ds)
 
 
 #Stampa del plot accuracy and val_loss
