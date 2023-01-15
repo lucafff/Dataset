@@ -15,6 +15,10 @@ cd Eng-Ita-Translator
 git clone https://github.com/lucafff/English-Italian-translator-using-transformer.git
 ```
 
+#### 2.5 Unzip of the full Dataset (optional)
+
+if you want to use the complete dataset it is necessary to unzip the itaFull.zip file in a way suitable for the operating system
+
 #### 3 Install requirements 
 ```
 cd English-Italian-translator-using-transformer
