@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 from tensorflow.keras import layers
 from tensorflow import keras
 
-choice = input("\nIf you want to use the smaller dataset press 1(suggested), if you want to use the full dataset press 2\n")
+choice = input("\nIf you want to use the smaller dataset press 1(suggested), if you want to use the full dataset press 2:\n")
 if choice == '2':
     file = open("itaFull/itaFull.txt", 'r', encoding = "utf8")
 else:
@@ -247,7 +247,7 @@ class PositionalEmbedding(layers.Layer):
 
         #Parametri del tranformer
 
-choice = input("\nIf you want to custom your parameters press 1, if you want to use the suggested ones press 2\n")
+choice = input("\nIf you want to custom your parameters press 1, if you want to use the suggested ones press 2:\n")
 if choice == '2':
     embed_dim = 256
     dense_dim = 2048
@@ -293,8 +293,8 @@ else:
     x = TransformerDecoder(embed_dim, dense_dim, num_heads)(x, encoder_outputs)
     
     choice2 = "2.0"
-    while float(choice2) < 0.09 or float(choice2) > 1.1:
-        choice2 = input("\nscegli dropout fra 0.1 e 1\n")
+    while float(choice2) < 0.09 or float(choice2) > 1.0:
+        choice2 = input("\nChoose dropout between 0.1 and 0.99 (suggested 0.5):\n")
     x = layers.Dropout(float(choice2))(x)
     decoder_outputs = layers.Dense(vocab_size, activation="softmax")(x)
     transformer = keras.Model([encoder_inputs, decoder_inputs], decoder_outputs)
@@ -306,13 +306,13 @@ else:
     transformer.summary()
 
     #definizione delle epoche ed effettiva fit del tranformer
-    choice = input("\nIf you want to use Adam press 1, if you want to use RMSprop press 2
+    choice = input("\nIf you want to use Adam press 1, if you want to use RMSprop press 2:\n")
     if choice == '2':
         opt = keras.optimizers.RMSprop(learning_rate=0.001)
     else:
         opt = keras.optimizers.Adam(learning_rate=0.001)
                    
-    choice = input("\nDecide the number of epoches you want to do\n")
+    choice = input("\nDecide the number of epoches you want to do (number suggested for good results 20):\n")
     transformer.compile(
         optimizer=opt,
         loss="sparse_categorical_crossentropy",
@@ -345,7 +345,7 @@ plt.show()
 
 #Stampa di 5 traduzione eseguite dal modello
 print("\n")
-print("Stampa di 5 traduzioni eseguite dal modello")
+print("Print of 5 translation made by the model")
 print("\n")
 ita_vocab = target_vectorization.get_vocabulary()
 ita_index_lookup = dict(zip(range(len(ita_vocab)), ita_vocab))
