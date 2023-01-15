@@ -295,7 +295,7 @@ else:
     choice2 = "2.0"
     while float(choice2) < 0.09 or float(choice2) > 1.1:
         choice2 = input("\nscegli dropout fra 0.1 e 1\n")
-    x = layers.Dropout(float(choice2)(x)
+    x = layers.Dropout(float(choice2))(x)
     decoder_outputs = layers.Dense(vocab_size, activation="softmax")(x)
     transformer = keras.Model([encoder_inputs, decoder_inputs], decoder_outputs)
 
