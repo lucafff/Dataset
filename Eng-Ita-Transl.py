@@ -9,7 +9,12 @@ import matplotlib.pyplot as plt
 from tensorflow.keras import layers
 from tensorflow import keras
 
-file = open("ita.txt", 'r', encoding = "utf8")
+choice = input("\nIf you want to use the smaller dataset press 1(suggested), if you want to use the full dataset press 2\n")
+if choice == '2':
+    file = open("itaFull/itaFull.txt", 'r', encoding = "utf8")
+else:
+    file = open("ita.txt", 'r', encoding = "utf8")
+    
 raw_data = []
 
 for line in file:
@@ -31,9 +36,9 @@ def convert(list):
 
 data = convert(raw_data)
 
-#Visualizzazione di tre traduzione casuali
+#Visualization of three examples of translation
 print("\n")
-print("Visualizzazione di tre traduzione casuali dal dataset\n")
+print("Visualization of three examples of translation\n")
 for i in range(3):
     print(random.choice(data))
     print("\n")
@@ -48,7 +53,7 @@ train_pairs = raw_data[:num_train_samples]
 val_pairs = raw_data[num_train_samples:num_train_samples + num_val_samples]
 test_pairs = raw_data[num_train_samples + num_val_samples:]
 
-#pulizia caratteri speciali nel dataset per migliorare la compresione del modello
+#pulizia caratteri speciali nel dataset per migliorare la compresione del modello 
 strip_chars = " "
 strip_chars = string.punctuation
 strip_chars = strip_chars.replace("[", "")
@@ -108,7 +113,7 @@ train_ds = make_dataset(train_pairs)
 val_ds = make_dataset(val_pairs)
 
 print("\n")
-print("Esempio di Tokenizzazione di alcune frasi")
+print("example Tokenization of some phrases")
 print("\n")
 print(list(train_ds.as_numpy_iterator())[50])
 
@@ -258,7 +263,7 @@ transformer = keras.Model([encoder_inputs, decoder_inputs], decoder_outputs)
 
 #stampa dei parametri
 print("\n")
-print("Struttura del modello creato")
+print("Structure of the model")
 print("\n")
 transformer.summary()
 
@@ -272,7 +277,7 @@ history = transformer.fit(train_ds, epochs=30, validation_data=val_ds)
 
 
 #Stampa del plot accuracy and val_loss
-print("Stampa plot della accurcy e del loss")
+print("\nPrint of the accuracy and loss's plot \n")
 acc = history.history['accuracy']
 val_acc = history.history['val_accuracy']
 loss = history.history['loss']
