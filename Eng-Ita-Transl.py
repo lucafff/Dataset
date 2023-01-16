@@ -351,7 +351,7 @@ plt.plot(epochs, val_loss, 'b', label='Validation loss')
 plt.title('Training and validation loss')
 plt.legend()
 
-plt.show()
+plt.show(block = False)
 
 #Stampa di 5 traduzione eseguite dal modello
 print("\n")
@@ -382,3 +382,5 @@ for _ in range(5):
     print("-")
     print(input_sentence)
     print(decode_sequence(input_sentence))
+    
+plt.show()
