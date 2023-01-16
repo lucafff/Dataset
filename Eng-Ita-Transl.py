@@ -93,11 +93,11 @@ target_vectorization.adapt(train_italian_texts)
 flag = input("\nIf you want to custom your parameters press 1, if you want to use the suggested ones press 2:\n")
 if flag == '2':
     choice = input("\nPress 1 for batch size 64(standard), 2 for size 128, 3 for size 256 and 4 for size 512:\n")
-    if choice = 1:
+    if choice == 1:
         batch_size = 64
-    elif choice = 2:
+    elif choice == 2:
         batch_size = 128
-    elif choice = 3:
+    elif choice == 3:
         batch_size = 256
     else: 
         batch_size = 512
