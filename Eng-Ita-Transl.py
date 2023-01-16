@@ -91,7 +91,7 @@ target_vectorization.adapt(train_italian_texts)
 
 #creazione del dataset vero e proprio
 flag = input("\nIf you want to custom your parameters press 1, if you want to use the suggested ones press 2:\n")
-if flag == '2':
+if flag == '1':
     choice = input("\nPress 1 for batch size 64(standard), 2 for size 128, 3 for size 256 and 4 for size 512:\n")
     if choice == 1:
         batch_size = 64
