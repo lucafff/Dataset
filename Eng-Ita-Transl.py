@@ -2,8 +2,6 @@ import random
 import tensorflow as tf
 import string
 import re
-import string
-import re
 import numpy as np
 import matplotlib.pyplot as plt
 from tensorflow.keras import layers
